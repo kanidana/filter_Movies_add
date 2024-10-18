@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 
+//definition du composant filtre qui permet de filtrer les films 
 const Filtre = ({onFilter}) => {
-    
-        const [title, setTitle] = useState('');
+    // declaration des etats permettant de stocker les valeur des champs pour le filtrage
+        // etat pour le titre a filtrer
+        const [title, setTitle] = useState(''); 
         const [note, setNote] = useState('');
 
+        // fonction appele lorsqu'on click sur le button filtrer por filtrer les films
         const userClickButton =()=>{
             onFilter({title, note: parseFloat(note)})
         }
@@ -21,4 +24,5 @@ const Filtre = ({onFilter}) => {
     
 };
 
+// exportation du composant filtre
 export default Filtre;

@@ -1,10 +1,13 @@
+// importation des differents composants creer dans components
 import React, { useState } from "react";
 import Filtre from "./components/Filtre";
 import MoviesList from "./components/MoviesList";
 import MoviesCard from "./components/MoviesCard";
 import './App.css'
 
+// definition du composant app principale 
 const App = ()=>{
+  // creation d'un etat pour afficher les films sur l'interface utilisation de notre app
   const [films, setFilm] = useState([
     { titre: 'Inception', 
       description: 'A mind-bending thriller', 
@@ -18,13 +21,17 @@ const App = ()=>{
       note: 8.6 },
   ]);
 
+  // creation d'un etat permettant de filtrer la liste de film afficher
   const [filmFiltrer, setFilmFiltrer] = useState(films);
 
+
+  // fonction ajout film permettant a l'utilisateurs  d'ajouter des nouveaux films
   const ajouFilms = (film)=>{
     setFilm([...films, film])
     setFilmFiltrer([...films, film])
   }
 
+  // fonction permettant de filtrer les films en fonction de la note et le titre
   const filmFiltre = ({ titre, note }) => {
     let filmFiltrer = films;
     if (titre) {
@@ -35,7 +42,8 @@ const App = ()=>{
     }
     setFilmFiltrer(filmFiltrer);
   };
-  
+
+  //  
   return (
     <div className="App">
       <h1 className="myTitle">All-Movies</h1>

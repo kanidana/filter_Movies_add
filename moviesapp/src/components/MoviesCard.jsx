@@ -1,37 +1,39 @@
 import React, { useState } from 'react';
 
 const MoviesCard = ({onAdd}) => {
-    const [titre, setTitre] = useState('');
-    const [description, setDescription] = useState('');
-    const [note, setNote] = useState('');
-    const [poster, setPoster] = useState('');
+    // utilisation d'un seul etat pour tous les champs
+    const [formpart, setFormpart] = useState('');
 
+    // fonction pour gerer les changements dans les champs du formulaire
     const auClick = (e)=>{
-        e.preventDefault()
-        onAdd({titre, description, poster, note: parseFloat(note)});
-        setDescription("");
-        setPoster("");
-        setTitre("");
-        setNote("");
+        const {name, value} = e.target;
+        setFormpart({
+            ...formpart, [name]: value
+        })
     }
 
+    // fonction a appelee lors de la somission du formulaire
+    const submitclick =(e) =>{
+        e.preventDefault();
+        onAdd({...formpart, note : parseFloat(formpart.note)});
+        setFormpart({
+            titre:'',
+            description:'',
+            poster:'',
+            note:''
+        })
+    }
+
+    // creaction des input permettant au l'utilisateur de saisir les valeurs
     return (
-        <form onSubmit={auClick}>
-            <input type='text' placeholder='Titre' value={titre} onChange={(e)=>{
-                setTitre(e.target.value)}} required 
-            /><br/>
+        <form onSubmit={submitclick}>
+            <input type='text' name='titre' placeholder='Titre' value={formpart.titre} onChange={auClick} required /><br/>
 
-            <input type='text' placeholder='Description' value={description} onChange={(e)=>{
-                setDescription(e.target.value)}} required 
-            /><br/>
+            <input type='text' name='description' placeholder='Description' value={formpart.description} onChange={auClick} required /><br/>
 
-            <input type='text' placeholder='Poster' value={poster} onChange={(e)=>{
-                setPoster(e.target.value)}} required 
-            /><br/>
+            <input type='text' name='poster' placeholder='Poster' value={formpart.poster} onChange={auClick} required/><br/>
 
-            <input type='text' placeholder='Note' value={note} onChange={(e)=>{
-                setNote(e.target.value)}} required 
-            /><br/>
+            <input type='text' name='note' placeholder='Note' value={formpart.note} onChange={auClick} required /><br/>
 
             <button type='submit'>Ajouter Film</button>
         </form>

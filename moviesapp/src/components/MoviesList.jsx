@@ -7,13 +7,13 @@ const MoviesList = ({ films }) => {
             {/* Parcourt la liste des films et affiche chaque film */}
             {films.map((film, index) => (
                 <div key={index}>
-                    {/* Affiche l'image du poster du film */}
                     
                     <h1 style={{color:"white"}}>{film.titre}</h1>
                     <p style={{color:"white"}}> Rate: {film.note}</p>
                     <p style={{color:"white"}}>{film.description}</p>
-                    
+                     {/* Affiche l'image du poster du film */}
                     <img style={{width:"20rem"}} src={film.poster} alt='Poster du film' />
+
                 </div>
             ))}
         </div>
